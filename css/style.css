@@ -53,7 +53,7 @@ body {
 }
 
 .hero {
- background-image: url('../images/hero.png');
+ background-image: url('../images/hero.svg');
  background-size: cover;
  height: 707px;
  padding-top: 194px;
