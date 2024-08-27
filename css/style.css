@@ -1,3 +1,164 @@
+/**
+  Нормализация блочной модели
+ */
+ *,
+ ::before,
+ ::after {
+   box-sizing: border-box;
+ }
+ 
+ /**
+   Убираем внутренние отступы слева тегам списков,
+   у которых есть атрибут class
+  */
+ :where(ul, ol):where([class]) {
+   padding-left: 0;
+ }
+ 
+ /**
+   Убираем внешние отступы body и двум другим тегам,
+   у которых есть атрибут class
+  */
+ body,
+ :where(blockquote, figure):where([class]) {
+   margin: 0;
+ }
+ 
+ /**
+   Убираем внешние отступы вертикали нужным тегам,
+   у которых есть атрибут class
+  */
+ :where(
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6,
+   p,
+   ul,
+   ol,
+   dl
+ ):where([class]) {
+   margin-block: 0;
+ }
+ 
+ :where(dd[class]) {
+   margin-left: 0;
+ }
+ 
+ :where(fieldset[class]) {
+   margin-left: 0;
+   padding: 0;
+   border: none;
+ }
+ 
+ /**
+   Убираем стандартный маркер маркированному списку,
+   у которого есть атрибут class
+  */
+ :where(ul[class]) {
+   list-style: none;
+ }
+ 
+ :where(address[class]) {
+   font-style: normal;
+ }
+ 
+ /**
+   Обнуляем вертикальные внешние отступы параграфа,
+   объявляем локальную переменную для внешнего отступа вниз,
+   чтобы избежать взаимодействие с более сложным селектором
+  */
+ p {
+   --paragraphMarginBottom: 24px;
+ 
+   margin-block: 0;
+ }
+ 
+ /**
+   Внешний отступ вниз для параграфа без атрибута class,
+   который расположен не последним среди своих соседних элементов
+  */
+ p:where(:not([class]):not(:last-child)) {
+   margin-bottom: var(--paragraphMarginBottom);
+ }
+ 
+ 
+ /**
+   Упрощаем работу с изображениями
+  */
+ img {
+   display: block;
+   max-width: 100%;
+ }
+ 
+ /**
+   Наследуем свойства шрифт для полей ввода
+  */
+ input,
+ textarea,
+ select,
+ button {
+   font: inherit;
+ }
+ 
+ html {
+   /**
+     Пригодится в большинстве ситуаций
+     (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+   height: 100%;
+ }
+ 
+ /**
+   Плавный скролл
+  */
+ html,
+ :has(:target) {
+   scroll-behavior: smooth;
+ }
+ 
+ body {
+   /**
+     Пригодится в большинстве ситуаций
+     (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+   min-height: 100%;
+   /**
+     Унифицированный интерлиньяж
+    */
+   line-height: 1.5;
+ }
+ 
+ /**
+   Приводим к единому цвету svg-элементы
+  */
+ svg *[fill] { fill: currentColor }
+ svg *[stroke] { stroke: currentColor }
+ 
+ /**
+   Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+  */
+ svg * {
+   transition-property: fill, stroke;
+ }
+ 
+ /**
+   Удаляем все анимации и переходы для людей,
+   которые предпочитают их не использовать
+  */
+ @media (prefers-reduced-motion: reduce) {
+   *,
+   ::before,
+   ::after {
+     animation-duration: 0.01ms !important;
+     animation-iteration-count: 1 !important;
+     transition-duration: 0.01ms !important;
+     scroll-behavior: auto !important;
+   }
+ }
+
 body {
     margin: 0;
 }
@@ -693,3 +854,259 @@ input {
     background-image: url(../image/Group\ 22.png);
 }
 
+.content-container__wildest-fantasies {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 864px;
+    margin-top: 200px;
+    background-image: url(image/Group\ 22.png);
+}
+
+.wildest-fantasies__list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 8%;
+    height: 100%;
+    width: max-content;
+}
+
+.list-container__title {
+    font-size: 27px;
+    line-height: 138%;
+}
+
+.list-container__list-link {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.list-link__item-link {
+    display: flex;
+    gap: 25px;
+}
+
+.item-link__link {
+    font-size: 20px;
+    line-height: 190%;
+    text-decoration: none;
+}
+
+.item-link__link:hover {
+    color: #e3b873;
+    text-decoration: underline;
+}
+
+.wildest-fantasies__image-container-one {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: absolute;
+    top: -35px;
+    right: 32%;
+}
+
+.width-354 {
+    width: 354px;
+}
+
+.wildest-fantasies__image-container-two {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: -100px;
+    right: 3%;
+}
+
+.content-container__our-clients {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    width: 100%;
+    height: 1100px;
+    margin-top: 100px;
+}
+
+.our-clients__title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-container__title {
+    color: #181818;
+    font-size: 20px;
+    line-height: 138%;
+}
+
+.title-container__recommend {
+    text-align: center;
+    font-size: 18px;
+    line-height: 163%;
+}
+
+.our-clients__card-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-container__clients-card {
+    position: relative;
+    width: 333px;
+    height: 390px;
+    box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+    padding: 24px 32px 0px 20px;
+}
+
+.clients-card__image-name {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-name__image {
+    border-radius: 40px;
+}
+
+.image-name__name {
+    margin: 0px;
+    font-size: 18px;
+    line-height: 127%;
+    color: #181818;
+}
+
+.clients-card__paragraph {
+    color: #959595;
+    font-size: 13px;
+    line-height: 180%;
+}
+
+.clients-card__button {
+    z-index: 1;
+    position: absolute;
+    bottom: -25px;
+    left: 0px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 280px;
+    height: 50px;
+    font-size: 17px;
+    line-height: 138%;
+    border: none;
+    background-color: #e3b873;
+    box-shadow: 5px 5px 20px 0px rgba(227, 184, 115, 0.5);
+}
+
+.card-container__bottom-image-container {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.content-container__bottom-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    height: 953px;
+    background: linear-gradient(180deg,
+            rgba(24, 24, 24, 0.9) 3.47%,
+            rgba(24, 24, 24, 0.72) 100%),
+        url(image/image\ 7.2.png);
+}
+
+.bottom-container__form {
+    position: absolute;
+    top: -220px;
+}
+
+.form__container-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #131313;
+    width: 800px;
+    height: 445px;
+    gap: 40px;
+}
+
+.container-bottom__form-title {
+    width: 257px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 138%;
+    margin-top: 28px;
+}
+
+.container-bottom__form-black-two {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.form-black-two__form-two {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.form-black-two__button-container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+.button-container__button-form-black-two {
+    font-size: 13px;
+    line-height: 204%;
+    padding: 10px 80px;
+    border: none;
+    border-radius: 2px;
+    background-color: #e3b873;
+}
+
+.bottom-container__title-container {
+    display: flex;
+    margin-top: 245px;
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+}
+
+.title-container__address {
+    text-align: center;
+    font-size: 20px;
+    line-height: 138%;
+}
+
+#media-display {
+    display: none;
+}
+
+.container-bottom__paragraph {
+    text-align: center;
+    width: 340px;
+    font-size: 11px;
+}
+
+.image-container__bottom-image {
+    width: 100%;
+}
